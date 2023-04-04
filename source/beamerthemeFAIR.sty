@@ -1,0 +1,106 @@
+\mode<presentation>
+
+% Requirement
+\RequirePackage{tikz}
+
+% Settings
+\usecolortheme{FAIR}
+\useinnertheme{FAIR}
+\useoutertheme{FAIR}
+\usefonttheme{FAIR}
+
+% remove beamer navigation symbols
+\setbeamertemplate{navigation symbols}{}
+
+% shrink margins
+\setbeamersize{text margin left=1.25em,text margin right=1.25em}
+
+% lists, captions
+\setbeamertemplate{enumerate items}[default]
+
+
+% blocks like theorem
+\setbeamertemplate{blocks}[rounded][shadow=true]
+
+% USER ADDED (Adrian Oeftiger 24.7.19)
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{mathtools}
+\usepackage{listings}
+\usepackage{siunitx}
+\usepackage{subcaption}
+\captionsetup[subfigure]{font=scriptsize,labelfont=scriptsize}
+\usepackage{setspace}
+\usepackage{dsfont}
+\usepackage{graphicx}
+\usepackage[space]{grffile} % allow space in filename in includegraphics
+\usepackage{fourier} % for the attention sign
+\usepackage{pifont} % for todo and done tick signs
+\usepackage{hyperref}
+
+\def\UrlBreaks{\do\/\do-}
+
+\colorlet{darkgreen}{green!50!black}
+\colorlet{darkred}{red!80!black}
+\colorlet{darkorange}{orange!80!black}
+\definecolor{awesomeorange}{rgb}{0.898, 0.328, 0.102} %#e6541a https://rgb.to/color/720/awesome-orange
+
+\newcommand{\sothat}{\item[$\Longrightarrow$]}
+\newcommand{\see}{\item[$\longrightarrow$]}
+\newcommand{\shouldbe}{\ensuremath{\mathrel{\stackrel{!}{=}}}}
+\newcommand{\qand}{\ensuremath{\quad\text{and}\quad}}
+\newcommand{\xy}{\ensuremath{_{x,y}}}
+\newcommand{\lie}[1]{\,\mathrm{:}{#1}\mathrm{:}\,}
+
+\newcommand{\cmark}{\ding{51}}%
+\newcommand{\xmark}{\ding{55}}%
+\newcommand{\done}{\item[\color{darkgreen}{\cmark}]}
+\newcommand{\todo}{\item[\color{darkred}{\xmark}]}
+\newcommand{\progresssymbol}{
+    \begin{tikzpicture}[limb/.style={line cap=round,line width=1.5mm,line join=bevel}, baseline=-8mm]
+    \draw[line width=2mm,rounded corners,fill=yellow] (-1.85,0) -- (0,-1.85) -- (1.85,0) -- (0,1.85) -- cycle;
+    \fill (1.5mm,7mm) circle (1.5mm);
+    \fill(0,-7.5mm) -- ++(10mm,0mm) -- ++(120:2mm)--++(100:1mm)--++(150:2mm) arc (70:170:2.5mm and 1mm);
+    \draw[limb] (-7.5mm,-6.5mm)--++(70:4mm)--++(85:4mm) coordinate(a)--++(-45:5mm)--(-2.5mm,-6.5mm);
+    \fill[rotate around={45:(a)}] ([shift={(-0.5mm,0.55mm)}]a) --++(0mm,-3mm)--++
+            (7mm,-0.5mm)coordinate(b)--++(0mm,4mm)coordinate(c)--cycle;
+    \draw[limb] ([shift={(-0.6mm,-0.4mm)}]b) --++(-120:5mm) ([shift={(-0.5mm,-0.5mm)}]c) --++
+            (-3mm,0mm)--++(-100:3mm)coordinate (d);
+    \draw[ultra thick] (d) -- ++(-45:1.25cm);
+    \end{tikzpicture}
+}
+\newcommand{\progress}{\item[\color{black}{\resizebox{!}{0.8em}{\progresssymbol}}\hspace*{-0.2em}]}
+\newcommand{\attention}{\item[\raisebox{0.1em}{\color{red}\danger}]}
+
+\newcommand\ballref[1]{%
+\tikz \node[circle, shade,ball color=structure.fg,inner sep=0pt,%
+    text width=8pt,font=\tiny,align=center] {\color{black}\ref{#1}};
+}
+
+\newenvironment{changemargin}[2]{%
+\begin{list}{}{%
+\setlength{\topsep}{0pt}%
+\setlength{\leftmargin}{#1}%
+\setlength{\rightmargin}{#2}%
+\setlength{\listparindent}{\parindent}%
+\setlength{\itemindent}{\parindent}%
+\setlength{\parsep}{\parskip}%
+}%
+\item[]}{\end{list}}
+
+    \renewenvironment{quote}{%
+        \list{}{%
+            \leftmargin0.5cm   % this is the adjusting screw
+            \rightmargin\leftmargin
+        }
+        \item\relax
+    }
+    {\endlist}
+
+\setbeamercolor{block title}{fg=black,bg=faircolor}
+
+\usepackage[backend=biber, style=numeric, sorting=none, natbib=true]{biblatex}
+\setbeamertemplate{bibliography item}[text]
+
+\mode<all>

@@ -1,0 +1,174 @@
+\pdfobjcompresslevel=0
+\documentclass[a4paper,graphics,t]{beamer} %, handout
+
+\usepackage[utf8]{inputenc}
+%\usepackage[scaled]{uarial} % not available in Linux
+\renewcommand*\familydefault{\sfdefault} %% Only if the base font of the document is to be sans serif
+
+\usepackage{multirow}
+\usepackage[T1]{fontenc}
+% \usepackage{titling}
+
+\title{\texorpdfstring{%
+    %\\[0.5cm]
+    Lecture 13: Wrap-up \\[0.3em] Numerical Methods of \break Accelerator Physics %
+    }{%
+        Lecture 13: Wrap-up Numerical Methods of Accelerator Physics%
+    }%
+}
+\subtitle{\texorpdfstring{%
+        \normalfont{Dr.\ Adrian Oeftiger}%
+    }{}%
+}
+\date{3 February 2023}
+\author{Dr.\ Adrian Oeftiger}
+
+\usetheme{FAIR}
+    \setbeamercovered{invisible} %default
+    % \setbeamercovered{transparent} % Items to be uncovered already visible, but almost transparent
+
+\addbibresource{resources.bib}
+\usepackage{relsize}
+
+\captionsetup{font=scriptsize,labelfont={bf,sf}}
+
+\begin{document}
+
+\begin{frame}[noframenumbering]{}
+    \titlepage
+\end{frame}
+
+\begin{frame}[c]{Overview}
+    Learning objects for lecture series:
+    \begin{itemize}
+        \item basic models of accelerator physics
+        \item suitable methods for their implementation
+    \end{itemize}
+    \vspace{1em}
+    Topics covered:
+    \begin{enumerate}
+        \item \textbf{reduced models}: steering, focusing, acceleration
+        \item \textbf{maps} of linear periodic systems + \textbf{stability analysis}
+        \item beam \textbf{transport models}: particles, beam distributions (self-consistent modelling)
+        \item \textbf{control-room} applications and \textbf{diagnostics}:
+        \begin{itemize}
+            \see tune reconstruction
+            \see tomographic reconstruction of phase space
+            \see closed-orbit control
+        \end{itemize}
+    \end{enumerate}
+\end{frame}
+
+\begin{frame}{Examination}
+    \begin{itemize}
+        \item \textbf{30 min} oral exam in TEMF library on \textbf{14 April 2023} \break (check your TUCaN for the time slot or ask me)
+        \item format $=$ conceptual discussion on models of accelerator physics and numerical implementations
+        \item exam material $=$ $\sum$ summary slides
+        \attention you do \textbf{not} need to know how to write python code -- \break focus on the ideas and concepts we discussed!
+    \end{itemize}
+\end{frame}
+
+\begin{frame}[t]\frametitle{Golden Thread}
+    \begin{enumerate}[I.]
+        \item \textbf{basic concepts}: \textbf{\textcolor{blue}{lectures 1-3}}
+        \only<2>{
+        \begin{itemize}
+            \sothat using the simple pendulum as example
+            \see time scales in a synchrotron \break (transverse / longitudinal motion period, storage times)
+            \see phase space (system state), Hamiltonian (equations of motion)
+            \see discrete integrators: Euler, Euler-Cromer, leapfrog
+            \see statistical moments, emittance
+            \see non-linearities, Liouville theorem vs.\ filamentation (emittance growth)
+            \see discrete frequency analysis, NAFF algorithm (vs.\ FFT)
+            \see control of simulation error sources:
+            \begin{enumerate}[1.]
+                \item discretisation error (symplecticity!)
+                \item modelling error
+                \item numerical artefacts
+                \item (input error)
+            \end{enumerate}
+            \see deterministic chaos, \break early indicators: (max.) Lyapunov exponent, frequency map analysis
+        \end{itemize}
+        }
+        \item<1,3-> \textbf{longitudinal dynamics}: \textbf{\textcolor{blue}{lectures 4-6}}
+        \only<3>{
+        \begin{itemize}
+            \see Lorentz force, electric longitudinal field $E_z$ to accelerate
+            \see beam rigidity, paraxial approximation
+            \see momentum compaction, phase slippage, transition energy
+            \see phase focusing and stability (classical vs.\ relativistic regime)
+            \see longitudinal tracking equations (discrete one-turn map)
+            \see synchrotron Hamiltonian, rf bucket
+            \see Monte-Carlo sampling (random number generation)
+            \see equilibrium distributions (thermal PDF), \break small-amplitude approximation vs.\ nonlinear matching
+            \see emittance growth mechanisms (filamentation $\leftrightarrow$ bucket non-linearity) from dipole and quadrupole moment oscillations
+        \end{itemize}
+        }
+        \item<1,4-> \textbf{transverse dynamics}: \textbf{\textcolor{blue}{lectures 7-8}}
+        \only<4>{
+        \begin{itemize}
+            \see magnetic fields for bending (steering) and focusing
+            \see multipole representation, dipole / quadrupole / sextupole magnets
+            \see Hill differential equation, quasi-harmonic oscillation
+            \see betatron transport matrices
+            \see FODO cell, alternate-gradient focusing
+            \see optics / Twiss functions, $\beta$-function as beam envelope, \break dispersion function
+            \see stability of periodic transport maps
+            \see betatron tune, chromaticity
+        \end{itemize}
+        }
+        \item<1,5-> \textbf{applications}: %\textbf{\textcolor{blue}{lectures 9-14}}
+        \only<5>{
+        \begin{itemize}
+            \see longitudinal phase-space tomography \textbf{\textcolor{blue}{(lecture 9)}}
+            \begin{itemize}
+                \item Radon transform, sinogram, Fourier Slice Theorem
+                \item filtered back projection %(inverse Radon transform) \break
+                vs.\ algebraic reconstruction technique
+            \end{itemize}
+            \see closed orbit distortion \textbf{\textcolor{blue}{(lecture 10)}}
+            \begin{itemize}
+                \item local orbit correction (bumps)
+                \item global orbit correction (orbit response matrix, SVD)
+            \end{itemize}
+            \see self-consistent modelling / collective effects \textbf{\textcolor{blue}{(lecture 12)}}
+            \begin{itemize}
+                \item categories of beam interactions (space charge, ...)
+                \item longitudinal space charge, line density derivative $\lambda'$ model
+                \item microwave instability
+            \end{itemize}
+            \see machine learning \textbf{\textcolor{blue}{(lectures 11, 14)}}
+            \begin{itemize}
+                \see reinforcement learning (discrete vs.\ continuous state/action spaces)%, Q-learning \& actor-critic methods)
+                \see Bayesian optimisation (Gaussian processes, uncertainty modelling)
+            \end{itemize}
+        \end{itemize}
+        }
+    \end{enumerate}
+    \vspace{0.5em}
+\end{frame}
+
+\begin{frame}[plain, noframenumbering, c]
+    % \vspace{2cm}
+    \begin{beamercolorbox}[sep=12pt,center]{block title}
+        \usebeamerfont{section title}
+        You have now solid fundamental knowledge on numerical modelling of periodic physics + have seen in action a few dynamical examples from accelerator physics! \\[1em]
+        ... and perhaps became a happy python user. \\[1em]
+        Well done! :))
+    \end{beamercolorbox}
+\end{frame}
+
+% \newcounter{finalframe}
+% \setcounter{finalframe}{\value{framenumber}}
+
+% % \section{References}
+% % \let\frametitle\oldframetitle
+% \begin{frame}[allowframebreaks]{References}
+%    \begin{spacing}{1.2}
+%    \printbibliography[heading=none]
+%    \end{spacing}
+% \end{frame}
+
+% \setcounter{framenumber}{\value{finalframe}}
+
+\end{document}

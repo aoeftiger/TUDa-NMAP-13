@@ -1,0 +1,89 @@
+\mode<presentation>
+
+\setbeamertemplate{background}{
+    \begin{tikzpicture}
+        \useasboundingbox (0,0) rectangle(\the\paperwidth,\the\paperheight);
+        \ifnum\thepage=1\relax % show title image only on page 1
+            \put(27,7){\includegraphics[width=0.98\linewidth]{FAIRGSI-Title}} % SIS100 image
+        \fi
+    \end{tikzpicture}
+}
+
+% Title page
+\defbeamertemplate*{title page}{FAIR}{
+    \vfill
+    \begin{beamercolorbox}[wd=\linewidth]{title page header}
+        \centering
+        \usebeamerfont{title}\inserttitle\par\vspace{0.5em}
+        \usebeamerfont{subtitle}\insertsubtitle
+    \end{beamercolorbox}
+}
+%% Frame title
+%\defbeamertemplate*{frametitle}{FAIR}{
+%%    \begin{beamercolorbox}[wd=\linewidth,ht=0cm]{frametitle} %\paperheight
+%    \begin{beamercolorbox}[wd=10cm,ht=0cm]{frametitle} %\paperheight
+%        \begin{tikzpicture}
+%%            \useasboundingbox (0,0) rectangle(\the\paperwidth,\the\paperheight);
+%            \useasboundingbox (0,0) rectangle(10cm,\the\paperheight);
+%            \ifx\insertframesubtitle\@empty
+%                {
+%                    \node[anchor=west,black,font=\large\bfseries] at (0.05,0.95){\insertframetitle};
+%                }
+%            \else
+%                {
+%                    \node[anchor=west,black,font=\large\bfseries] at (0.05,1.35){\insertframetitle};
+%                    \node[anchor=west,black,font=\small\bfseries] at (0.05,0.95){\insertframesubtitle};
+%                }
+%            \fi
+%        \end{tikzpicture}
+%    \end{beamercolorbox}
+%    \vspace{-1.5em}
+%}
+
+%Frame title
+\setbeamertemplate{frametitle}{%
+	\vskip-35pt \large%30pt
+	\begin{minipage}[b][23pt]{80.5mm}%
+		\ifx\insertframesubtitle\@empty
+			{\flushleft\insertframetitle}%
+		\else
+			{\flushleft\insertframetitle\newline\normalsize\insertframesubtitle}%
+		\fi
+	\end{minipage}%
+}
+
+% Footer
+\defbeamertemplate*{headline}{FAIR}{
+    \vspace{5.3em}
+    \begin{tikzpicture}
+        \fill[color=faircolor] (0,\the\paperheight-47) rectangle (0.37,\the\paperheight-37); % orange dot north
+        \fill[color=fairgrayA] (0.37,\the\paperheight-47) rectangle (\the\paperwidth,\the\paperheight-37); % gray bar north
+       % \fill[color=fairgrayB] (0,\the\paperheight-48) rectangle (0.37,\the\paperheight-47); % orange dot north  KS
+       % \fill[color=fairgrayC] (0.37,\the\paperheight-48) rectangle (\the\paperwidth,\the\paperheight-47); % gray bar north  KS
+
+        \put(300,235.5){\includegraphics[width=0.13\linewidth]{GSI_Logo}} % GSI logo  KS
+        \put(261,231){\includegraphics[width=0.09\linewidth]{FAIR_Logo}} % FAIR logo  KS
+    \end{tikzpicture}
+}
+
+% Footer
+\defbeamertemplate*{footline}{FAIR}{
+	\ifnum \insertpagenumber = 1
+		\begin{tikzpicture}[remember picture,overlay]
+			\useasboundingbox (0,0) rectangle(\the\paperwidth,\the\paperheight);
+			\fill[color=faircolor] (0,-0.1) rectangle (0.37,0.27); % orange dot south
+			\fill[color=fairgrayA] (0.37,-0.10) rectangle (\the\paperwidth,0.27); % gray bar south
+		\end{tikzpicture}
+		\qquad ~ \vspace*{1mm}%    \qquad {\fontsize{7}{10}\selectfont \usebeamerfont{date}\insertdate\ | FAIR~GmbH | GSI~GmbH | \usebeamerfont{author}\insertauthor\ | \insertframenumber}  KS
+	\else
+%		\vspace{-1mm}
+		\begin{tikzpicture}[remember picture,overlay]
+			\useasboundingbox (0,0) rectangle(\the\paperwidth,\the\paperheight);
+			\fill[color=faircolor] (0,-0.1) rectangle (0.37,0.27); % orange dot south
+			\fill[color=fairgrayA] (0.37,-0.10) rectangle (\the\paperwidth,0.27); % gray bar south
+		\end{tikzpicture}
+		\qquad {\fontsize{7}{10}\selectfont FAIR~GmbH | GSI~GmbH \hfill\insertauthor\ \hfill\insertdate\ \hfill \insertframenumber/\inserttotalframenumber } \vspace*{1mm}
+	\fi
+}
+
+\mode<all>
